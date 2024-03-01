@@ -33,15 +33,14 @@
              arjs="trackingMethod: best; sourceType: webcam;debugUIEnabled: false;">
         <!-- we use cors proxy to avoid cross-origin problems ATTENTION! you need to set up your server -->
         <a-nft type="nft"
-               url="https://cors-anywhere.herokuapp.com/https://raw.githack.com/AR-js-org/AR.js/master/aframe/examples/image-tracking/nft/trex/trex-image/trex"
+               url="https://raw.githack.com/polodo-code/estampe/7d258509e846e5ec43a862dd868bdd9487407fc7/ImageTracker/city.fset"
                smooth="true"
                smoothCount="10"
                smoothTolerance=".01"
                smoothThreshold="5">
-            <a-entity gltf-model="https://cors-anywhere.herokuapp.com/https://raw.githack.com/AR-js-org/AR.js/master/aframe/examples/image-tracking/nft/trex/scene.gltf"
-                      scale="5 5 5"
-                      position="150 300 -100">
-            </a-entity>
+
+            <a-box position="-1 0.5 -3" rotation="0 45 0" color="#4CC3D9"></a-box>
+
         </a-nft>
         <a-entity camera></a-entity>
     </a-scene>
