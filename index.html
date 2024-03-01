@@ -33,11 +33,19 @@
              arjs="trackingMethod: best; sourceType: webcam;debugUIEnabled: false;">
         <!-- we use cors proxy to avoid cross-origin problems ATTENTION! you need to set up your server -->
         <a-nft type="nft"
-               url="https://raw.githack.com/polodo-code/estampe/main/ImageTracker/city" 
+               url="https://raw.githack.com/polodo-code/estampe/main/ImageTracker/city"
                smooth="true"
                smoothCount="10"
                smoothTolerance=".01"
                smoothThreshold="5">
+
+            <!-- emplacement de modification -->
+            <!-- Ajout de mots flottants inspirés du thème du "souvenir" -->
+            <a-text value="Memories" position="0 0.5 -0.5" color="white" scale="2 2 2" look-at="[camera]"></a-text>
+            <a-text value="Remembrance" position="1 0.5 0" color="white" scale="2 2 2" look-at="[camera]"></a-text>
+            <a-text value="Nostalgia" position="-1 0.5 0" color="white" scale="2 2 2" look-at="[camera]"></a-text>
+            <a-text value="Recollection" position="0 -0.5 -1" color="white" scale="2 2 2" look-at="[camera]"></a-text>
+            <!-- Fin de l'ajout des mots flottants -->
 
             <a-box position="0 0 0" scale=" 100 100 100" rotation="0 0 0" color="#4CC3D9"></a-box>
 
