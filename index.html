@@ -39,13 +39,14 @@
         <div>Patientez quelques instants...</div>
     </div>
 
+    <!-- Déplacer le bouton en dehors de arjs-loader -->
+    <button id="wordInput" onclick="showTextInput()">Entrer un mot</button>
+
     <a-scene vr-mode-ui="enabled: false;"
              renderer="logarithmicDepthBuffer: true; precision: medium;"
              embedded arjs="trackingMethod: best; sourceType: webcam;debugUIEnabled: false;">
 
         <!-- début modification ChatGPT -->
-        <!-- Bouton pour entrer un mot -->
-        <button id="wordInput" onclick="showTextInput()">Entrer un mot</button>
         <!-- Div pour le formulaire de saisie -->
         <div id="wordForm" style="display: none;">
             <input type="text" id="wordInputField" placeholder="Entrez un mot (1-15 lettres)">
@@ -61,7 +62,8 @@
                smooth="true" smoothCount="10" smoothTolerance=".01" smoothThreshold="5">
 
             <!-- emplacement de modification -->
-            <a-text value="TEST" position="200 0 -200" color="white" scale="200 200 200" rotation="0 0 -90"></a-text>
+            <!-- Ajout de mots flottants inspirés du thème du "souvenir" -->
+            <!-- Fin de l'ajout des mots flottants -->
 
         </a-nft>
         <a-entity camera></a-entity>
@@ -71,6 +73,11 @@
         function showTextInput() {
             document.getElementById("wordInput").style.display = "none";
             document.getElementById("wordForm").style.display = "block";
+            focusInput();
+        }
+
+        function focusInput() {
+            document.getElementById("wordInputField").focus();
         }
 
         function addWord() {
@@ -91,6 +98,4 @@
             }
         }
     </script>
-</body>
 
-</html>
