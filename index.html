@@ -22,38 +22,72 @@
             font-size: 1.25em;
             color: white;
         }
+
+    /* Styles pour le bouton */
+    #wordInput {
+        position: absolute;
+        top: 10px;
+        left: 10px;
+        z-index: 10000;
+    }
 </style>
 
-<body style="margin : 0px; overflow: hidden;">
+<body style="margin: 0px; overflow: hidden;">
 
     <!-- minimal loader shown until image descriptors are loaded -->
     <div class="arjs-loader">
         <div>Patientez quelques instants...</div>
     </div>
 
+    <button id="wordInput" onclick="showTextInput()">Entrer un mot</button>
+
+    <!-- début modification ChatGPT -->
+    <!-- Div pour le formulaire de saisie -->
+    <div id="wordForm" style="display: none;">
+        <input type="text" id="wordInputField" placeholder="Entrez un mot (1-15 lettres)">
+        <button onclick="addWord()">Valider</button>
+    </div>
+    <!-- Zone pour afficher les mots -->
+    <div id="wordDisplay" style="position: absolute; top: 30px;"></div>
+
+    <!-- Fin modification ChatGPT -->
+
     <a-scene vr-mode-ui="enabled: false;"
              renderer="logarithmicDepthBuffer: true; precision: medium;"
-             embedded
-             arjs="trackingMethod: best; sourceType: webcam;debugUIEnabled: false;">
-        <!-- we use cors proxy to avoid cross-origin problems ATTENTION! you need to set up your server -->
+             embedded arjs="trackingMethod: best; sourceType: webcam;debugUIEnabled: false;">
 
         <a-nft type="nft"
                url="https://raw.githack.com/polodo-code/estampe/main/ImageTracker/monument1"
-               smooth="true"
-               smoothCount="10"
-               smoothTolerance=".01"
-               smoothThreshold="5">
+               smooth="true" smoothCount="10" smoothTolerance=".01" smoothThreshold="5">
 
-            <!-- emplacement de modification -->
-            <!-- Ajout de mots flottants inspirés du thème du "souvenir" -->
-
-            <a-text value="souvenir" position="0 50 -200" color="white" scale="200 200 200" rotation="-90 0 0"></a-text>
-            <a-text value="memoire" position="0 50 -300" color="white" scale="200 200 200" rotation="-90 0 0"></a-text>
-
-
-            <!-- Fin de l'ajout des mots flottants -->
+        <!-- ajout de contenu image tracker-->
 
         </a-nft>
         <a-entity camera></a-entity>
     </a-scene>
+
+    <script>
+        function showTextInput() {
+            document.getElementById("wordInput").style.display = "none";
+            document.getElementById("wordForm").style.display = "block";
+        }
+
+        function addWord() {
+            var word = document.getElementById("wordInputField").value.trim();
+            if (word.length > 0 && word.length <= 15) {
+                var wordDisplay = document.getElementById("wordDisplay");
+                var existingWords = wordDisplay.innerHTML;
+                var newX = -400 + (existingWords.split('<a-text').length - 1) * 100;
+                var newZ = -100;
+                var newPosition = newX + ' 0 ' + newZ;
+                var newText = '<a-text value="' + word + '" position="' + newPosition +
+                    '" color="white" scale="200 200 200" rotation="0 0 90"></a-text>';
+                wordDisplay.innerHTML += newText;
+                document.getElementById("wordForm").style.display = "none";
+                document.getElementById("wordInput").style.display = "block";
+            } else {
+                alert("Veuillez entrer un mot de 1 à 15 lettres.");
+            }
+        }
+    </script>
 </body>
