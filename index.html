@@ -26,9 +26,12 @@
     /* Styles pour le bouton */
     #wordInput {
         position: absolute;
-        top: 10px;
-        left: 10px;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
         z-index: 10000;
+        font-size: 24px;
+        padding: 10px 20px;
     }
 </style>
 
@@ -39,31 +42,28 @@
         <div>Patientez quelques instants...</div>
     </div>
 
-    <!-- Déplacer le bouton en dehors de arjs-loader -->
-    <button id="wordInput" onclick="showTextInput()">Entrer un mot</button>
-
     <a-scene vr-mode-ui="enabled: false;"
              renderer="logarithmicDepthBuffer: true; precision: medium;"
              embedded arjs="trackingMethod: best; sourceType: webcam;debugUIEnabled: false;">
 
         <!-- début modification ChatGPT -->
+        <!-- Déplacer le bouton à l'intérieur de arjs-loader -->
+        <button id="wordInput" onclick="showTextInput()">Entrer un mot</button>
+
         <!-- Div pour le formulaire de saisie -->
         <div id="wordForm" style="display: none;">
             <input type="text" id="wordInputField" placeholder="Entrez un mot (1-15 lettres)" oninput="updateWord()" onkeypress="handleKeyPress(event)">
             <button onclick="addWord()">Valider</button>
         </div>
-        <!-- Zone pour afficher les mots -->
-        <div id="wordDisplay" style="position: absolute; top: 30px;"></div>
-
         <!-- Fin modification ChatGPT -->
-
+        <!-- Zone pour afficher les mots -->
         <a-nft type="nft"
                url="https://raw.githack.com/polodo-code/estampe/main/ImageTracker/monument1"
                smooth="true" smoothCount="10" smoothTolerance=".01" smoothThreshold="5">
 
-            <!-- emplacement de modification -->
-            <!-- Ajout de mots flottants inspirés du thème du "souvenir" -->
-            <!-- Fin de l'ajout des mots flottants -->
+            <!-- début enfant image -->
+            <a-entity id="wordDisplay" style="position: absolute; top: 0;"></a-entity>
+            <!-- fin enfant image -->
 
         </a-nft>
         <a-entity camera></a-entity>
