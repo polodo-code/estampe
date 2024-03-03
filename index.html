@@ -60,7 +60,7 @@
                url="https://raw.githack.com/polodo-code/estampe/main/ImageTracker/monument1"
                smooth="true" smoothCount="10" smoothTolerance=".01" smoothThreshold="5">
 
-        <!-- ajout de contenu image tracker-->
+            <!-- ajout de contenu image tracker-->
 
         </a-nft>
         <a-entity camera></a-entity>
@@ -70,6 +70,11 @@
         function showTextInput() {
             document.getElementById("wordInput").style.display = "none";
             document.getElementById("wordForm").style.display = "block";
+            focusInput();
+        }
+
+        function focusInput() {
+            document.getElementById("wordInputField").focus();
         }
 
         function addWord() {
@@ -90,4 +95,5 @@
             }
         }
     </script>
+
 </body>
