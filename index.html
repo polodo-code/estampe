@@ -39,28 +39,31 @@
         <div>Patientez quelques instants...</div>
     </div>
 
+    <!-- Déplacer le bouton en dehors de arjs-loader -->
     <button id="wordInput" onclick="showTextInput()">Entrer un mot</button>
-
-    <!-- début modification ChatGPT -->
-    <!-- Div pour le formulaire de saisie -->
-    <div id="wordForm" style="display: none;">
-        <input type="text" id="wordInputField" placeholder="Entrez un mot (1-15 lettres)">
-        <button onclick="addWord()">Valider</button>
-    </div>
-    <!-- Zone pour afficher les mots -->
-    <div id="wordDisplay" style="position: absolute; top: 30px;"></div>
-
-    <!-- Fin modification ChatGPT -->
 
     <a-scene vr-mode-ui="enabled: false;"
              renderer="logarithmicDepthBuffer: true; precision: medium;"
              embedded arjs="trackingMethod: best; sourceType: webcam;debugUIEnabled: false;">
 
+        <!-- début modification ChatGPT -->
+        <!-- Div pour le formulaire de saisie -->
+        <div id="wordForm" style="display: none;">
+            <input type="text" id="wordInputField" placeholder="Entrez un mot (1-15 lettres)" oninput="updateWord()" onkeypress="handleKeyPress(event)">
+            <button onclick="addWord()">Valider</button>
+        </div>
+        <!-- Zone pour afficher les mots -->
+        <div id="wordDisplay" style="position: absolute; top: 30px;"></div>
+
+        <!-- Fin modification ChatGPT -->
+
         <a-nft type="nft"
                url="https://raw.githack.com/polodo-code/estampe/main/ImageTracker/monument1"
                smooth="true" smoothCount="10" smoothTolerance=".01" smoothThreshold="5">
 
-            <!-- ajout de contenu image tracker-->
+            <!-- emplacement de modification -->
+            <!-- Ajout de mots flottants inspirés du thème du "souvenir" -->
+            <!-- Fin de l'ajout des mots flottants -->
 
         </a-nft>
         <a-entity camera></a-entity>
@@ -75,6 +78,20 @@
 
         function focusInput() {
             document.getElementById("wordInputField").focus();
+        }
+
+        function updateWord() {
+            var word = document.getElementById("wordInputField").value.trim();
+            if (word.length > 0 && word.length <= 15) {
+                var wordDisplay = document.getElementById("wordDisplay");
+                wordDisplay.innerHTML = '<a-text value="' + word + '" position="0 0 0" color="white" scale="200 200 200" rotation="0 0 90"></a-text>';
+            }
+        }
+
+        function handleKeyPress(event) {
+            if (event.key === 'Enter') {
+                addWord();
+            }
         }
 
         function addWord() {
@@ -95,5 +112,4 @@
             }
         }
     </script>
-
 </body>
