@@ -1,58 +1,96 @@
 ﻿<!DOCTYPE html>
+<html>
 
-<script src="https://cdn.jsdelivr.net/gh/aframevr/aframe@1.3.0/dist/aframe-master.min.js"></script>
-<script src="https://raw.githack.com/AR-js-org/AR.js/master/aframe/build/aframe-ar-nft.js"></script>
+<head>
+    <title>AR Text Entry</title>
+    <script src="https://cdn.jsdelivr.net/gh/aframevr/aframe@1.3.0/dist/aframe-master.min.js"></script>
+    <script src="https://raw.githack.com/AR-js-org/AR.js/master/aframe/build/aframe-ar-nft.js"></script>
 
-<style>
-    .arjs-loader {
-        height: 100%;
-        width: 100%;
-        position: absolute;
-        top: 0;
-        left: 0;
-        background-color: rgba(0, 0, 0, 0.8);
-        z-index: 9999;
-        display: flex;
-        justify-content: center;
-        align-items: center;
-    }
-
-        .arjs-loader div {
-            text-align: center;
-            font-size: 1.25em;
-            color: white;
+    <style>
+        .arjs-loader {
+            height: 100%;
+            width: 100%;
+            position: absolute;
+            top: 0;
+            left: 0;
+            background-color: rgba(0, 0, 0, 0.8);
+            z-index: 9999;
+            display: flex;
+            justify-content: center;
+            align-items: center;
         }
-</style>
 
-<body style="margin : 0px; overflow: hidden;">
+            .arjs-loader div {
+                text-align: center;
+                font-size: 1.25em;
+                color: white;
+            }
+
+        #textInputContainer {
+            position: absolute;
+            top: 20px;
+            width: 100%;
+            display: none;
+            justify-content: center;
+        }
+
+        #textInput {
+            width: 80%;
+            font-size: 18px;
+            padding: 10px;
+            border: 2px solid #ccc;
+            border-radius: 5px;
+        }
+
+        #openKeyboardBtn {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            padding: 10px 20px;
+            font-size: 20px;
+        }
+    </style>
+</head>
+
+<body style="margin: 0px; overflow: hidden;">
 
     <!-- minimal loader shown until image descriptors are loaded -->
     <div class="arjs-loader">
         <div>Patientez quelques instants...</div>
     </div>
 
-    <a-scene vr-mode-ui="enabled: false;"
-             renderer="logarithmicDepthBuffer: true; precision: medium;"
-             embedded
-             arjs="trackingMethod: best; sourceType: webcam;debugUIEnabled: false;">
-        <!-- we use cors proxy to avoid cross-origin problems ATTENTION! you need to set up your server -->
+    <!-- Bouton pour ouvrir le clavier -->
+    <button id="openKeyboardBtn" onclick="openKeyboard()">Ouvrir le clavier</button>
 
-        <a-nft type="nft"
-               url="https://raw.githack.com/polodo-code/estampe/main/ImageTracker/monument1"
-               smooth="true"
-               smoothCount="10"
-               smoothTolerance=".01"
-               smoothThreshold="5">
+    <!-- Zone de texte pour saisir le texte -->
+    <div id="textInputContainer">
+        <input type="text" id="textInput" placeholder="Saisissez votre texte" oninput="updateText()">
+    </div>
 
-            <!-- emplacement de modification -->
-            <!-- Ajout de mots flottants inspir�s du th�me du "souvenir" -->
+    <a-scene vr-mode-ui="enabled: false;" renderer="logarithmicDepthBuffer: true; precision: medium;" embedded arjs="trackingMethod: best; sourceType: webcam;debugUIEnabled: false;">
 
-            <a-text value="TEST" position="0 50 -200" color="white" scale="200 200 200" rotation="-90 0 0"></a-text>
+        <a-nft type="nft" url="https://raw.githack.com/polodo-code/estampe/main/ImageTracker/monument1" smooth="true" smoothCount="10" smoothTolerance=".01" smoothThreshold="5">
 
 
-            <!-- Fin de l'ajout des mots flottants -->
 
         </a-nft>
         <a-entity camera></a-entity>
     </a-scene>
+
+    <script>
+        function openKeyboard() {
+            document.getElementById("openKeyboardBtn").style.display = "none";
+            document.getElementById("textInputContainer").style.display = "flex";
+            document.getElementById("textInput").focus();
+        }
+
+        function updateText() {
+            var text = document.getElementById("textInput").value;
+            // Mettre à jour le texte en temps réel (ajoutez votre propre logique ici)
+            console.log("Texte en cours de saisie :", text);
+        }
+    </script>
 </body>
+
+</html>
