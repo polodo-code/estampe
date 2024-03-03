@@ -1,42 +1,30 @@
-<!DOCTYPE html>
-<html>
-<head>
-    <title>AR Text Entry</title>
-    <script src="https://cdn.jsdelivr.net/gh/aframevr/aframe@1.3.0/dist/aframe-master.min.js"></script>
-    <script src="https://raw.githack.com/AR-js-org/AR.js/master/aframe/build/aframe-ar-nft.js"></script>
-    <style>
-        .arjs-loader {
-            height: 100%;
-            width: 100%;
-            position: absolute;
-            top: 0;
-            left: 0;
-            background-color: rgba(0, 0, 0, 0.8);
-            z-index: 9999;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-        }
+ï»¿<!DOCTYPE html>
 
-            .arjs-loader div {
-                text-align: center;
-                font-size: 1.25em;
-                color: white;
-            }
+<script src="https://cdn.jsdelivr.net/gh/aframevr/aframe@1.3.0/dist/aframe-master.min.js"></script>
+<script src="https://raw.githack.com/AR-js-org/AR.js/master/aframe/build/aframe-ar-nft.js"></script>
 
-        /* Styles pour le bouton */
-        #wordInput {
-            position: absolute;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%);
-            z-index: 10000;
-            font-size: 24px;
-            padding: 10px 20px;
+<style>
+    .arjs-loader {
+        height: 100%;
+        width: 100%;
+        position: absolute;
+        top: 0;
+        left: 0;
+        background-color: rgba(0, 0, 0, 0.8);
+        z-index: 9999;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+
+        .arjs-loader div {
+            text-align: center;
+            font-size: 1.25em;
+            color: white;
         }
-    </style>
-</head>
-<body style="margin: 0px; overflow: hidden;">
+</style>
+
+<body style="margin : 0px; overflow: hidden;">
 
     <!-- minimal loader shown until image descriptors are loaded -->
     <div class="arjs-loader">
@@ -45,65 +33,26 @@
 
     <a-scene vr-mode-ui="enabled: false;"
              renderer="logarithmicDepthBuffer: true; precision: medium;"
-             embedded arjs="trackingMethod: best; sourceType: webcam;debugUIEnabled: false;">
+             embedded
+             arjs="trackingMethod: best; sourceType: webcam;debugUIEnabled: false;">
+        <!-- we use cors proxy to avoid cross-origin problems ATTENTION! you need to set up your server -->
 
-        <!-- début modification ChatGPT -->
-        <!-- Déplacer le bouton à l'intérieur de arjs-loader -->
-        <button id="wordInput" onclick="showTextInput()">Entrer un mot</button>
-
-        <!-- Div pour le formulaire de saisie -->
-        <div id="wordForm" style="display: none;">
-            <input type="text" id="wordInputField" placeholder="Entrez un mot (1-15 lettres)" onkeypress="handleKeyPress(event)">
-            <button onclick="addWord()">Valider</button>
-        </div>
-        <!-- Fin modification ChatGPT -->
-        <!-- Zone pour afficher les mots -->
         <a-nft type="nft"
                url="https://raw.githack.com/polodo-code/estampe/main/ImageTracker/monument1"
-               smooth="true" smoothCount="10" smoothTolerance=".01" smoothThreshold="5">
+               smooth="true"
+               smoothCount="10"
+               smoothTolerance=".01"
+               smoothThreshold="5">
 
-            <!-- début enfant image -->
-            <a-entity id="wordDisplay" style="position: absolute; top: 0;"></a-entity>
-            <!-- fin enfant image -->
+            <!-- emplacement de modification -->
+            <!-- Ajout de mots flottants inspirï¿½s du thï¿½me du "souvenir" -->
+
+            <a-text value="TEST" position="0 50 -200" color="white" scale="200 200 200" rotation="-90 0 0"></a-text>
+
+
+            <!-- Fin de l'ajout des mots flottants -->
 
         </a-nft>
         <a-entity camera></a-entity>
     </a-scene>
-
-    <script>
-        function showTextInput() {
-            document.getElementById("wordInput").style.display = "none";
-            document.getElementById("wordForm").style.display = "block";
-            focusInput();
-        }
-
-        function focusInput() {
-            document.getElementById("wordInputField").focus();
-        }
-
-        function handleKeyPress(event) {
-            if (event.key === 'Enter') {
-                addWord();
-            }
-        }
-
-        function addWord() {
-            var word = document.getElementById("wordInputField").value.trim();
-            if (word.length > 0 && word.length <= 15) {
-                var wordDisplay = document.getElementById("wordDisplay");
-                var existingWords = wordDisplay.innerHTML;
-                var newX = -400 + (existingWords.split('<a-text').length - 1) * 100;
-                var newZ = -100;
-                var newPosition = newX + ' 0 ' + newZ;
-                var newText = '<a-text value="' + word + '" position="' + newPosition +
-                    '" color="white" scale="200 200 200" rotation="0 0 90"></a-text>';
-                wordDisplay.innerHTML += newText;
-                document.getElementById("wordForm").style.display = "none";
-                document.getElementById("wordInput").style.display = "block";
-            } else {
-                alert("Veuillez entrer un mot de 1 à 15 lettres.");
-            }
-        }
-    </script>
 </body>
-</html>
