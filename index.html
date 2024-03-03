@@ -39,23 +39,22 @@
         <div>Patientez quelques instants...</div>
     </div>
 
-    <!-- Déplacer le bouton en dehors de arjs-loader -->
+    <!-- début modification ChatGPT -->
+    <!-- Bouton pour entrer un mot -->
     <button id="wordInput" onclick="showTextInput()">Entrer un mot</button>
+    <!-- Div pour le formulaire de saisie -->
+    <div id="wordForm" style="display: none;">
+        <input type="text" id="wordInputField" placeholder="Entrez un mot (1-15 lettres)">
+        <button onclick="addWord()">Valider</button>
+    </div>
+    <!-- Zone pour afficher les mots -->
+    <div id="wordDisplay" style="position: absolute; top: 30px;"></div>
+
+    <!-- Fin modification ChatGPT -->
 
     <a-scene vr-mode-ui="enabled: false;"
              renderer="logarithmicDepthBuffer: true; precision: medium;"
              embedded arjs="trackingMethod: best; sourceType: webcam;debugUIEnabled: false;">
-
-        <!-- début modification ChatGPT -->
-        <!-- Div pour le formulaire de saisie -->
-        <div id="wordForm" style="display: none;">
-            <input type="text" id="wordInputField" placeholder="Entrez un mot (1-15 lettres)">
-            <button onclick="addWord()">Valider</button>
-        </div>
-        <!-- Zone pour afficher les mots -->
-        <div id="wordDisplay" style="position: absolute; top: 30px;"></div>
-
-        <!-- Fin modification ChatGPT -->
 
         <a-nft type="nft"
                url="https://raw.githack.com/polodo-code/estampe/main/ImageTracker/monument1"
@@ -73,11 +72,6 @@
         function showTextInput() {
             document.getElementById("wordInput").style.display = "none";
             document.getElementById("wordForm").style.display = "block";
-            focusInput();
-        }
-
-        function focusInput() {
-            document.getElementById("wordInputField").focus();
         }
 
         function addWord() {
@@ -98,4 +92,4 @@
             }
         }
     </script>
-
+</body>
