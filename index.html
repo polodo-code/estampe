@@ -1,6 +1,4 @@
-﻿<!DOCTYPE html>
-
-<script src="https://cdn.jsdelivr.net/gh/aframevr/aframe@1.3.0/dist/aframe-master.min.js"></script>
+﻿<script src="https://cdn.jsdelivr.net/gh/aframevr/aframe@1.3.0/dist/aframe-master.min.js"></script>
 <script src="https://raw.githack.com/AR-js-org/AR.js/master/aframe/build/aframe-ar-nft.js"></script>
 
 <style>
@@ -32,41 +30,56 @@
     }
 </style>
 
-<body style="margin: 0px; overflow: hidden;">
+<body style="margin : 0px; overflow: hidden;">
+    <body style="margin: 0px; overflow: hidden;">
 
-    <!-- minimal loader shown until image descriptors are loaded -->
-    <div class="arjs-loader">
-        <div>Patientez quelques instants...</div>
-    </div>
+        <!-- minimal loader shown until image descriptors are loaded -->
+        <div class="arjs-loader">
+            <div>Patientez quelques instants...</div>
+        </div>
 
-    <!-- début modification ChatGPT -->
-    <!-- Bouton pour entrer un mot -->
-    <button id="wordInput" onclick="showTextInput()">Entrer un mot</button>
-    <!-- Div pour le formulaire de saisie -->
-    <div id="wordForm" style="display: none;">
-        <input type="text" id="wordInputField" placeholder="Entrez un mot (1-15 lettres)">
-        <button onclick="addWord()">Valider</button>
-    </div>
-    <!-- Zone pour afficher les mots -->
-    <div id="wordDisplay" style="position: absolute; top: 30px;"></div>
+        <button id="wordInput" onclick="showTextInput()">Entrer un mot</button>
 
-    <!-- Fin modification ChatGPT -->
+        <!-- d�but modification ChatGPT -->
+        <!-- Div pour le formulaire de saisie -->
+        <div id="wordForm" style="display: none;">
+            <input type="text" id="wordInputField" placeholder="Entrez un mot (1-15 lettres)">
+            <button onclick="addWord()">Valider</button>
+        </div>
+        <!-- Zone pour afficher les mots -->
+        <div id="wordDisplay" style="position: absolute; top: 30px;"></div>
 
-    <a-scene vr-mode-ui="enabled: false;"
-             renderer="logarithmicDepthBuffer: true; precision: medium;"
-             embedded arjs="trackingMethod: best; sourceType: webcam;debugUIEnabled: false;">
+        <!-- Fin modification ChatGPT -->
 
-        <a-nft type="nft"
-               url="https://raw.githack.com/polodo-code/estampe/main/ImageTracker/monument1"
-               smooth="true" smoothCount="10" smoothTolerance=".01" smoothThreshold="5">
+        <a-scene vr-mode-ui="enabled: false;"
+                 renderer="logarithmicDepthBuffer: true; precision: medium;"
+                 embedded
+                 arjs="trackingMethod: best; sourceType: webcam;debugUIEnabled: false;">
+            <!-- we use cors proxy to avoid cross-origin problems ATTENTION! you need to set up your server -->
+            embedded arjs="trackingMethod: best; sourceType: webcam;debugUIEnabled: false;">
 
-            <!-- emplacement de modification -->
-            <!-- Ajout de mots flottants inspirés du thème du "souvenir" -->
-            <!-- Fin de l'ajout des mots flottants -->
+            <a-nft type="nft"
+                   url="https://raw.githack.com/polodo-code/estampe/main/ImageTracker/monument1"
+                   smooth="true"
+                   smoothCount="10"
+                   smoothTolerance=".01"
+                   smoothThreshold="5">
+                smooth="true" smoothCount="10" smoothTolerance=".01" smoothThreshold="5">
 
-        </a-nft>
-        <a-entity camera></a-entity>
-    </a-scene>
+                <!-- emplacement de modification -->
+                <!-- Ajout de mots flottants inspir�s du th�me du "souvenir" -->
+
+                <a-text value="souvenir" position="0 50 -200" color="white" scale="200 200 200" rotation="-90 0 0"></a-text>
+                <a-text value="memoire" position="0 50 -300" color="white" scale="200 200 200" rotation="-90 0 0"></a-text>
+
+
+                <!-- Fin de l'ajout des mots flottants -->
+                <!-- ajout de contenu image tracker-->
+
+            </a-nft>
+            <a-entity camera></a-entity>
+        </a-scene>
+    </body>
 
     <script>
         function showTextInput() {
@@ -88,7 +101,7 @@
                 document.getElementById("wordForm").style.display = "none";
                 document.getElementById("wordInput").style.display = "block";
             } else {
-                alert("Veuillez entrer un mot de 1 à 15 lettres.");
+                alert("Veuillez entrer un mot de 1 � 15 lettres.");
             }
         }
     </script>
